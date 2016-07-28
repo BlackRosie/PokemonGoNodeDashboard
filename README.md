@@ -7,8 +7,8 @@ Pokémon GO Node Dashboard
 This is for educational purposes only.
 
 ## Demo:
-![alt tag](https://github.com/BlackRosie/PokemonGoNodeDashboard/blob/master/demo_images/dashboard.png?raw=true)
-![alt tag](https://github.com/BlackRosie/PokemonGoNodeDashboard/blob/master/demo_images/login.png?raw=true)
+
+![alt tag](https://github.com/BlackRosie/PokemonGoNodeDashboard/blob/master/demo_images/dashboard.png?raw=true) ![alt tag](https://github.com/BlackRosie/PokemonGoNodeDashboard/blob/master/demo_images/login.png?raw=true)
 
 # Getting Started
 
@@ -64,10 +64,10 @@ $ gulp // this will start the server and launch the webpage. TODO: delay launch 
 - [X] Display Encountered pokemon on map
 - [X] Login Page trainer/google
 - [X] Navigate around map, using arrow keys on keyboard. // TODO update using nintendo controller
+- [X] Pokemon catch blacklist filter
 - [ ] Display visual on map when pokestop worked
 - [ ] Double click map to set trainer location.
 - [ ] Display lured pokestops
-- [ ] Pokemon catch blacklist filter
 - [ ] Run to pokestops
 - [ ] Display all nearby pokemon on map
 - [ ] Drop items when bag is full
