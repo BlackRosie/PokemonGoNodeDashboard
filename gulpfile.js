@@ -5,12 +5,19 @@ var pm2 = require('pm2');
 var pug = require('gulp-pug');
 var open = require('open');
 
+var shell = require('gulp-shell');
 
 
 gulp.task('lint', function() {
     gulp.src('./**/*.js')
         .pipe(jshint());
 });
+
+gulp.task('install_dependencies', shell.task([
+    'npm install',
+    'cd submodules',
+    'npm install'
+]));
 
 gulp.task('less', function() {
     gulp.src('./src/less/app.less')
@@ -69,7 +76,7 @@ gulp.task('start', function() {
     }
 });
 
-gulp.task('default', ['watch', 'apply-prod-environment', 'start'], function() {
+gulp.task('default', ['install_dependencies', 'watch', 'apply-prod-environment', 'start'], function() {
     open('http://localhost:3000', function(err) {
         if (err) throw err;
         console.log('The user closed the browser');

@@ -10,21 +10,34 @@ This is for educational purposes only.
 
 ## Step One: Install Prerequisites
 
-1. npm
-2. nodemon
-3. gulp
+1. install npm: <https://docs.npmjs.com/cli/install>
+2. npm install -g nodemon
+3. npm install -g gulp
 
 ## Step Two: Install PokemonGoNodeDashboard
 
 1. Download or clone the repository.
 2. Using a terminal, navigate into the cloned repository.
-3. Install all requirements for the project using `npm install`
-4. (optional) Install Xbox 360 Controller drivers <http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver> // Not functional
+
+  ### Easy Install
+
+3. npm run install_dependencies
+
+  ### Or Manual Install
+
+4. Install all requirements for the project using `npm install`
+
+5. Install all requirements for the pokemongo api project using
+
+  - `cd /submodules`
+  - `npm install`
+
+6. (optional) Install Xbox 360 Controller drivers <http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver> // Not functional // TODO make gulp install project dependencies
 
 ## Step Three: Run PokemonGoNodeDashboard
 
 ```bash
-gulp // this will start the server and launch the webpage. TODO: delay launch till server is started
+$ gulp // this will start the server and launch the webpage. TODO: delay launch till server is started
 ```
 
 ## directions
@@ -63,6 +76,7 @@ gulp // this will start the server and launch the webpage. TODO: delay launch ti
 # Bugs:
 
 - No Error handling on login.
+- Initial Trainer Marker not set correctly. updates correctly after moving
 - Pressing Start multple times creates multple trainer looops
 - Must Select outside of the map so the arrow keys send the movement commands
 - Multiple Instances not supported currently as trainer object is reused on the server.
