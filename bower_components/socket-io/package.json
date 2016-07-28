@@ -1,0 +1,24 @@
+{
+  "name": "socket-io",
+  "version": "1.0.0",
+  "description": "Web component wrapper for socket.io",
+  "main": "socket-io.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pablo-Rodriguez/socket-io.git"
+  },
+  "author": "Pablo-Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pablo-Rodriguez/socket-io/issues"
+  },
+  "homepage": "https://github.com/Pablo-Rodriguez/socket-io#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7",
+    "socket.io-client": "^1.3.7"
+  }
+}

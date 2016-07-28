@@ -1,0 +1,28 @@
+{
+  "name": "socket-io",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Pablo-Rodriguez/socket-io",
+  "authors": [
+    "Pablo-Rodriguez <pablorp1996@gmail.com>"
+  ],
+  "description": "Web component wrapper for socket.io",
+  "main": "socket-io.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "f269f3313780a091676e9e9abca6df9d565324c6"
+  },
+  "_source": "https://github.com/Pablo-Rodriguez/socket-io.git",
+  "_target": "^1.0.0",
+  "_originalSource": "socket-io",
+  "_direct": true
+}

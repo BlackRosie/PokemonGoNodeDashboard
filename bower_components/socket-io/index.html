@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="import" href="socket-io.html"/>
+</head>
+<body>
+    <template is="dom-bind" id="app">
+        <socket-io url="http://localhost:5000" socketevents="msg"></socket-io>
+        <ul>
+            <template is="dom-repeat" items="{{msgs}}" as="item">
+                <li>
+                    <span>message: </span><span>{{item.msg}}</span>
+                </li>
+            </template>
+        </ul>
+    </template>
+    <script>
+        var app = document.querySelector('#app');
+        app.msgs = [];
+        app.addEventListener('dom-change', function () {
+            var socket = document.querySelector('socket-io');
+
+            socket.addEventListener('connect', function () {
+                console.log('Usuario conectado');
+            });
+            socket.addEventListener('msg', function (e) {
+                app.push('msgs', {msg: e.detail[0]});
+            });
+        });
+    </script>
+</body>
+</html>

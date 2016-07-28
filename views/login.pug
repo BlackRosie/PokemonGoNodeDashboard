@@ -1,0 +1,51 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+        meta(charset='utf-8')
+        link(type='text/css', rel='stylesheet', href='/stylesheets/style.css', media='screen,projection')
+        link(type='text/css', rel='stylesheet', href='materialize/dist/css/materialize.min.css', media='screen,projection')
+        link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    body
+        hgroup
+            img(src='/images/pokemon-go-logo.png' , height='256', width='256')
+        form
+            .group
+                input(id='username' type='text')
+                span.highlight
+                span.bar
+                label Email
+            .group
+                input(id='password' type='password')
+                span.highlight
+                span.bar
+                label Password
+            .group
+                select(id='provider')
+                    option(value='', disabled='') Choose your account provider
+                    option(value='google' selected='') google account
+                    option(value='ptc') trainer account
+                label Materialize Select
+            .group
+                .row
+                    .input-field.col.s6
+                        input#latitude.validate(placeholder='latitude', value='', type='text')
+                        label(for='latitude') latitude
+                    .input-field.col.s6
+                        input#longitude.validate(placeholder='longitude', value='', type='text')
+                        label(for='longitude') longitude
+            button.button.buttonBlue(type='button' onclick='login()')
+                | Login
+                .ripples.buttonRipples
+                    span.ripplesCircle
+        footer
+            a(href='', target='_blank')
+                img(src='/images/Materialize.png')
+            p
+                | designed using
+                a(href='http://materializecss.com/', target='_blank') materializecss
+        script(src='/jquery/dist/jquery.min.js')
+        script(src='/materialize/dist/js/materialize.min.js')
+        script(src='/socket.io-client/socket.io.js')
+        script(src='/fetch/fetch.js')
+        script(src='/javascripts/Login.js')

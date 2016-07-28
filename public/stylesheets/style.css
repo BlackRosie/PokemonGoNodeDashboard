@@ -1,0 +1,523 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+    color: #00B7FF;
+}
+
+/**
+ * Font-definition & partial css reset. Only Woff, since we lack support for IE8 anyway.
+ */
+
+@font-face {
+    font-family: 'Pretendo';
+    src: url('http://attackmupp.com/resources/nespad/Pretendo.woff') format('woff');
+}
+@font-face {
+    font-family: 'NESController';
+    src: url('http://attackmupp.com/resources/nespad/nes_controller_cad_mrshrike.woff') format('woff');
+}
+* {
+    box-sizing: border-box;
+    font: inherit;
+}
+body {
+    font: 15px/2 nescontroller, sans-serif;
+}
+.button {
+    outline: none;
+    transition: all .05s ease;
+}
+
+/**
+ * NES-gamepad
+ */
+
+#nespad {
+    margin: 20px auto;
+    border: 1em solid #e2dedb;
+    border-top-width: 3em;
+    border-radius: .3em;
+    background-color: #2a2a2a;
+    width: 40em;
+    height: 17.5em;
+    color: #c3442d;
+    font: 15px/2 nescontroller, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-shadow: .1em .1em 0 hsla(0, 0%, 100%, .5), /* border */
+    .075em .1em 0 hsla(0, 0%, 80%, 1), /* 3d */
+    .15em .2em 0 hsla(0, 0%, 78%, 1), .225em .3em 0 hsla(0, 0%, 76%, 1), .3em .4em 0 hsla(0, 0%, 74%, 1), .375em .5em 0 .1em hsla(0, 0%, 72%, 1), .425em .6em 0 .1em hsla(0, 0%, 70%, 1), .5em .7em 0 .1em hsla(0, 0%, 68%, 1), .575em .8em 0 .1em hsla(0, 0%, 66%, 1), .65em .9em 0 .1em hsla(0, 0%, 64%, 1), .725em 1em 0 .1em hsla(0, 0%, 62%, 1), .775em 1.1em 0 .08em hsla(0, 0%, 40%, 1), /* back piece */
+    .800em 1.1em 0 .13em hsla(0, 0%, 60%, 1), .875em 1.2em 0 .13em hsla(0, 0%, 58%, 1), .950em 1.3em 0 .13em hsla(0, 0%, 56%, 1), 1.025em 1.4em 0 .13em hsla(0, 0%, 54%, 1), 1.1em 1.5em 0 .13em hsla(0, 0%, 52%, 1), 1.175em 1.6em 0 .13em hsla(0, 0%, 50%, 1), 0.4em 1.1em .5em hsla(0, 0%, 20%, .1), /* shadow */
+    0.8em 1.3em .6em hsla(0, 0%, 20%, .1), 1.2em 1.6em .7em hsla(0, 0%, 20%, .1), 1.6em 1.8em .8em hsla(0, 0%, 20%, .1), 2em 2em .9em hsla(0, 0%, 20%, .1), 2.4em 2.2em 1em hsla(0, 0%, 20%, .1), 2.8em 2.4em 1.1em hsla(0, 0%, 20%, .1), 3.2em 2.6em 1.2em hsla(0, 0%, 20%, .1), 3.6em 2.8em 1.3em hsla(0, 0%, 20%, .1), 4em 3em 1.4em hsla(0, 0%, 20%, .1);
+}
+.cord {
+    position: absolute;
+    top: -1em;
+    width: 1.1em;
+    height: 3em;
+    background-color: #bbb;
+    margin-left: 10em;
+    box-shadow: -.2em 0 .2em .49em #222 inset;
+}
+.cord:before {
+    /* cord dent */
+    content: '';
+    position: absolute;
+    width: 1.7em;
+    height: .7em;
+    top: 2.35em;
+    left: -.4em;
+    background-color: #e2dedb;
+    box-shadow: -.05em -.1em .3em .1em #ccc inset;
+}
+.dpad-pane {
+    display: inline-block;
+    vertical-align: top;
+    margin: 6.5em 4.5em 5em;
+    width: 2.6em;
+    height: 2.6em;
+    position: relative;
+}
+.dpad-pane:before, .dpad-pane:after {
+    content: "";
+    background-color: #ddd;
+    width: 100%;
+    height: 280%;
+    position: absolute;
+    top: -94%;
+    left: 0;
+    border-radius: .3em;
+}
+.dpad-hole:before, .dpad-hole:after {
+    content: "";
+    background-color: #000;
+    margin: 7%;
+    width: 86%;
+    height: 265%;
+    position: absolute;
+    top: -93%;
+    left: 0;
+    border-radius: .2em;
+    z-index: 1;
+}
+.dpad-pane:after, .dpad-hole:after {
+    transform: rotate(90deg);
+}
+#dpad {
+    position: relative;
+    z-index: 1;
+    top: -.006em;
+    left: -.1em;
+}
+#dpad:after {
+    /* dpad-pit */
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 1.2em;
+    height: 1.2em;
+    margin: .4em .5em;
+    border-radius: 1em;
+    background: -webkit-radial-gradient(76% 63%, circle closest-corner, hsla(0, 0%, 60%, 0.45), hsla(0, 0%, 10%, 1) 100%);
+    background: -moz-radial-gradient(76% 63%, circle closest-corner, hsla(0, 0%, 60%, 0.45), hsla(0, 0%, 10%, 1) 100%);
+    background: radial-gradient(76% 63%, circle closest-corner, hsla(0, 0%, 60%, 0.45), hsla(0, 0%, 10%, 1) 100%);
+    box-shadow: -3px -2px 4px -1px #444444 inset/* scalable units did not work well across browsers */
+    ;
+}
+#dpad.up {
+    transform: rotate(.4deg) scaleY(0.98);
+    margin-top: .05em;
+    margin-left: .15em;
+}
+#dpad.right {
+    transform: rotate(.5deg) scaleX(1.02);
+    margin-top: .01em;
+    margin-left: .11em;
+}
+#dpad.down {
+    transform: rotate(-.6deg) scaleY(1.01);
+    margin-top: .05em;
+    margin-left: .05em;
+}
+#dpad.left {
+    transform: rotate(-.8deg) scaleX(0.97);
+    margin-top: .015em;
+    margin-left: .1em;
+}
+#dpad-body {
+    left: -2.3em;
+    top: -2.3em;
+    position: absolute;
+    z-index: 1;
+}
+#dpad .button {
+    position: absolute;
+    z-index: 2;
+    width: 2em;
+    height: 2em;
+    background-color: rgba(0, 0, 0, 0);
+    /* "transparent" buttons in ie9 aren't clickable, but rgba can be used */
+    border: none;
+    padding: 0;
+}
+#dpad .button:before {
+    content: "";
+    display: block;
+    position: absolute;
+    margin: 0 .55em 0;
+    width: .8em;
+    height: .8em;
+    border-width: .1em;
+    border-style: solid;
+    transform: rotate(315deg);
+}
+#dpad .button:after {
+    content: "";
+    display: block;
+    position: absolute;
+    margin: .5em .5em 0;
+    width: .8em;
+    height: .45em;
+    border-width: .1em;
+    border-style: solid;
+}
+#up {
+    top: -2.7em;
+}
+#up:before {
+    border-color: #151515 #444 transparent transparent;
+}
+#up:after {
+    border-color: transparent #444 #444 #151515;
+}
+#right {
+    left: 2.7em;
+    transform: rotate(90deg);
+}
+#right:before {
+    border-color: #444 #444 transparent transparent;
+}
+#right:after {
+    border-color: transparent #444 #151515 #151515;
+}
+#down {
+    top: 2.7em;
+    transform: rotate(180deg);
+}
+#down:before {
+    border-color: #444 #151515 transparent transparent;
+}
+#down:after {
+    border-color: transparent #151515 #151515 #444;
+}
+#left {
+    left: -2.7em;
+    transform: rotate(270deg);
+}
+#left:before {
+    border-color: #444 #151515 transparent transparent;
+}
+#left:after {
+    border-color: transparent #151515 #444 #444;
+}
+.menu-pane {
+    display: inline-block;
+    vertical-align: top;
+    width: 11.5em;
+    height: 100%;
+    overflow: hidden;
+    overflow: -moz-hidden-unscrollable;
+    /* normal hidden doesn't work in firefox here */
+    border: 0 solid rgba(100, 100, 100, .8);
+    border-width: .1em 0;
+}
+.menu-pane .labels {
+    border-radius: .3em;
+    height: 2em;
+    background-color: #888;
+    text-transform: uppercase;
+    padding: 0 .8em;
+    margin-top: 5.2em;
+    box-shadow: 0 -2.7em #888, 0 -5.4em #888, 0 7em #888;
+}
+.menu-pane label {
+    line-height: 1.4;
+    font-size: 1.3em;
+}
+.menu-pane .buttons {
+    margin: 0.67em 0;
+    width: 100%;
+    height: 3.6em;
+    border-radius: .3em;
+    background-color: #ddd;
+    text-transform: uppercase;
+    padding: 1.3em;
+    word-spacing: 2em;
+    position: relative;
+}
+.menu-pane .buttons:before {
+    /* indentation */
+    content: "";
+    position: absolute;
+    top: .4em;
+    right: .4em;
+    bottom: .4em;
+    left: .4em;
+    border: .3em solid transparent;
+    border-color: #b1b1b1 #f6f6f6 #eee #bbb;
+    box-shadow: 1em .8em .8em -1em hsla(0, 0%, 0%, 0.3) inset;
+}
+.menu-pane .button {
+    position: relative;
+    overflow: hidden;
+    top: -.3em;
+    left: -.16em;
+    height: 1.2em;
+    width: 3.3em;
+    border: 0;
+    border-radius: 1em;
+    background-color: #2a2a2a;
+    color: #2a2a2a;
+    box-shadow: .04em .08em 0 hsla(0, 0%, 26%, 1), /* 3d */
+    .08em .15em 0 hsla(0, 0%, 23%, 1), .12em .23em 0 hsla(0, 0%, 20%, 1), .16em .3em 0 hsla(0, 0%, 17%, 1), .16em .3em 0 .15em hsla(0, 0%, 0%, .9), /* hole */
+    .1em .075em .5em rgba(0, 0, 0, .3), /* shadow */
+    .3em .15em .5em rgba(0, 0, 0, .3), .6em .2em .5em rgba(0, 0, 0, .3), 1.2em .4em .5em rgba(0, 0, 0, .3);
+}
+.menu-pane .button:active {
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 0 .15em hsla(0, 0%, 0%, .9), /* hole */
+    .1em .075em .5em rgba(0, 0, 0, .3);
+}
+.start {
+    float: right;
+}
+.select {
+    float: left;
+}
+.action-pane {
+    display: inline-block;
+    vertical-align: top;
+    border-bottom: 1px solid transparent;
+    margin: 2.6em 0 0 1.1em;
+}
+.logo {
+    font: 1.3em/1 pretendo;
+    margin: 0 0 3.3rem 2rem;
+    cursor: default;
+}
+.logo:after {
+    content: '\AE';
+    vertical-align: super;
+    font: 0.6rem sans-serif;
+}
+.action-pane .label {
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 0.4rem;
+    width: 4rem;
+    height: 4rem;
+    margin-left: .8rem;
+    text-align: right;
+    line-height: 6.1em;
+    position: relative;
+    font-size: 1.5rem;
+}
+.action-pane .button {
+    position: absolute;
+    top: .02rem;
+    left: .22rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    background: #E0421B;
+    /* fallack */
+    background: -webkit-radial-gradient(35% 35%, circle closest-corner, #ff8957, #E0421B 100%);
+    background: -moz-radial-gradient(35% 35%, circle closest-corner, #ff8957, #E0421B 100%);
+    background: radial-gradient(35% 35%, circle closest-corner, #ff8957, #E0421B 100%);
+    border-radius: 2em;
+    border: .08em solid hsla(10, 90%, 55%, 1);
+    box-shadow: 2em 1em 0.2em 0 hsla(10, 90%, 45%, .5) inset, /* reflection */
+    .04em .1em 0 hsla(10, 90%, 30%, 1), /* 3d */
+    .08em .2em 0 hsla(10, 90%, 26%, 1), .12em .3em 0 hsla(10, 90%, 23%, 1), .1em .24em 0 .15em hsla(0, 0%, 15%, 1), /* hole */
+    .1em .075em .5em rgba(0, 0, 0, .3), /* shadow */
+    .3em .15em .5em rgba(0, 0, 0, .3), .6em .3em .5em rgba(0, 0, 0, .3), 1.2em .6em .5em rgba(0, 0, 0, .3);
+}
+.action-pane .button:active {
+    top: .40rem;
+    left: .35rem;
+    box-shadow: 2em 1em 0.2em 0 hsla(10, 90%, 45%, .5) inset, /* reflection */
+    .05em .1em 0 hsla(10, 90%, 30%, 1), /* 3d */
+    0 0 0 .15em hsla(0, 0%, 15%, 1), /* hole */
+    .1em .075em .5em rgba(0, 0, 0, .3);
+    /* shadow */
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Helvetica;
+    background: #eee;
+    -webkit-font-smoothing: antialiased;
+}
+hgroup {
+    text-align: center;
+}
+h1, h3 {
+    font-weight: 300;
+}
+h1 {
+    color: #636363;
+}
+h3 {
+    color: #4a89dc;
+}
+form {
+    width: 380px;
+    margin: 4em auto;
+    padding: 3em 2em 2em 2em;
+    background: #fafafa;
+    border: 1px solid #ebebeb;
+    box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+}
+.group {
+    position: relative;
+    margin-bottom: 45px;
+}
+input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    -webkit-appearance: none;
+    display: block;
+    background: #fafafa;
+    color: #636363;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #757575;
+}
+input:focus {
+    outline: none;
+}
+
+/* Label */
+
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 0px;
+    top: -10px;
+    transition: all 0.2s ease;
+}
+
+/* Button */
+
+.button {
+    position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    margin: .3em 0 1em 0;
+    width: 100%;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 16px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    letter-spacing: 1px;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid #3160B6;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.button:focus {
+    outline: 0;
+}
+
+/* Button modifiers */
+
+.buttonBlue {
+    background: #4a89dc;
+    text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+}
+.buttonBlue:hover {
+    background: #357bd8;
+}
+
+/* Ripples container */
+
+.ripples {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* Ripples circle */
+
+.ripplesCircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+}
+.ripples.is-active .ripplesCircle {
+    animation: ripples .4s ease-in;
+}
+
+/* Ripples animation */
+
+@keyframes ripples {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    100% {
+        width: 200%;
+        padding-bottom: 200%;
+        opacity: 0;
+    }
+}
+footer {
+    text-align: center;
+}
+footer p {
+    color: #888;
+    font-size: 13px;
+    letter-spacing: .4px;
+}
+footer a {
+    color: #4a89dc;
+    text-decoration: none;
+    transition: all .2s ease;
+}
+footer a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+footer img {
+    width: 80px;
+    transition: all .2s ease;
+}
+footer img:hover {
+    opacity: .83;
+}
+footer img:focus, footer a:focus {
+    outline: none;
+}

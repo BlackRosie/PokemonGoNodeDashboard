@@ -1,0 +1,24 @@
+{
+    "name": "PokemonGoNodeDashboard",
+    "description": "",
+    "main": "",
+    "authors": [
+        "BlackRosie <delayaudio@gmail.com>"
+    ],
+    "license": "MIT",
+    "homepage": "",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "^3.1.0",
+        "socket-io": "^1.0.0",
+        "socket.io-client": "^1.4.8",
+        "materialize": "^0.97.7",
+        "fetch": "^1.0.0"
+    }
+}

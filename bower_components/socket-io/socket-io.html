@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<script src="./build/library.js"></script>
+<script>
+    Polymer({
+        is: 'socket-io',
+        properties: {
+            socket: Object,
+            url: {
+                type: String,
+                value: ""
+            },
+            socketevents: {
+                type: String,
+                value: ""
+            },
+            namespace: {
+                type: String,
+                value: ""
+            }
+        },
+        ready: function () {
+            this.socket = io(this.url + this.namespace);
+            this.socket.on('connect', function () {
+                this.fire('connect', {msg:'hola'});
+            }.bind(this));
+
+            this.fire('msg', {
+                msg: 'hola'
+            });
+            this.socketevents.split(' ').forEach(function (e) {
+                this.socket.on(e, function () {
+                    var args = Array.prototype.slice.apply(arguments);
+                    this['last-' + e] = args;
+                    this.fire(e, args);
+                }.bind(this));
+            }.bind(this));
+        }
+    });
+</script>

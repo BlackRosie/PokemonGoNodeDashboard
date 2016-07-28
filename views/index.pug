@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+    meta(charset='utf-8')
+    link(type='text/css', rel='stylesheet', href='/stylesheets/style.css', media='screen,projection')
+    link(type='text/css', rel='stylesheet', href='materialize/dist/css/materialize.min.css', media='screen,projection')
+    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    title Console
+    style.
+      html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      }
+      #map {
+      height: 600px;
+      width:100%
+      }
+  body
+    nav
+      .nav-wrapper
+        a.brand-logo(href='') Logo
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='')
+              | Profile
+              span.new.badge 4
+          li.active
+            a(href='') Map Sandbox
+          li
+            a(href='') Logout
+    .row
+      .col.s12.m4.l2
+        a.waves-effect.waves-light.btn-large(id='start_hunting' onclick='start_hunting()') Start Hunting
+      .col.s12.m8.l10
+        #map
+    .row
+        figure#nespad
+          .cord
+          section.dpad-pane
+            .dpad-hole
+            #dpad
+              canvas#dpad-body(height='150', width='150')
+              button#up.button
+              button#right.button
+              button#down.button
+              button#left.button
+          section.menu-pane
+            .labels
+              label.select(for='select') Select
+              label.start(for='start') Start
+            .buttons
+              button#select.button.select Select
+              button#start.button.start Start
+          section.action-pane
+            .logo
+              | Nintendo
+            .buttons
+              label.label
+                | B
+                button#b.button
+              label.label
+                | A
+                button#a.button
+  script(src='/jquery/dist/jquery.min.js')
+  script(src='/materialize/dist/js/materialize.min.js')
+  script(src='/socket.io-client/socket.io.js')
+  script(src='/javascripts/Map.js')
+  script(src='/javascripts/Controller.js')
+  script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvVXWRCmfXfWtzLgaKc6szIonPyD5iTM&callback=initialize&libraries=geometry')
