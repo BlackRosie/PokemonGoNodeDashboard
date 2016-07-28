@@ -1,6 +1,6 @@
 {
     "name": "PokemonGoNodeDashboard",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "private": false,
     "scripts": {
         "install_dependencies": "npm install && cd submodules && git submodule update --init --recursive && npm install"
