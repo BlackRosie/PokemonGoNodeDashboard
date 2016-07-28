@@ -16,6 +16,7 @@ gulp.task('lint', function() {
 gulp.task('install_dependencies', shell.task([
     'npm install',
     'cd submodules',
+    'git submodule update --init --recursive',
     'npm install'
 ]));
 
