@@ -206,16 +206,18 @@ method.workNearbyPokemonStops = function(hb) {
                     Trainer.m_user.GetFort(fort.FortId, fort.Latitude, fort.Longitude,
                         function(err, fortresponse) {
                             try {
-                                if (fortresponse.result == 1) {
-                                    // 1 = success
-                                    // 2 = out of range ..
-                                    logger.log(fort);
-                                    logger.log(`${fort.FortId} used!!`.rainbow);
-                                } else {
-                                    // logger.log(fort.FortId + " out of range!!");
+                                // console.log(fortresponse);
+                                if (fortresponse) {
+                                    if (fortresponse.result == 1) {
+                                        // 1 = success
+                                        // 2 = out of range ..
+                                        logger.log(fort);
+                                        logger.log(`${fort.FortId} used!!`.rainbow);
+                                    } else {
+                                        // logger.log(fort.FortId + " out of range!!");
+                                    }
                                 }
                             } catch (e) {
-
                                 logger.log(e);
                             }
                         });
