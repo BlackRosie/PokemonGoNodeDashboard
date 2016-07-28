@@ -1,9 +1,13 @@
 {
     "name": "PokemonGoNodeDashboard",
-    "version": "0.0.1",
-    "private": true,
+    "version": "0.0.2",
+    "private": false,
     "scripts": {
         "install_dependencies": "npm install && cd submodules && git submodule update --init --recursive && npm install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BlackRosie/PokemonGoNodeDashboard"
     },
     "dependencies": {
         "body-parser": "~1.13.2",

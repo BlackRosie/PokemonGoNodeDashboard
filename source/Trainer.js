@@ -280,44 +280,54 @@ method.catchNearbyPokemon = function(hb) {
                     Trainer.m_socket.sockets.emit("messages",
                         encountered_packet);
 
-                    Trainer.m_user.CatchPokemon(
-                        currentPokemon, 1,
-                        1.950, 1,
-                        Trainer.m_usePokeballType,
-                        function(xsuc, xdat) {
-                            var status = [
-                                'Unexpected error',
-                                'Successful catch',
-                                'Catch Escape',
-                                'Catch Flee',
-                                'Missed Catch'
-                            ];
-                            try {
-                                logger.log(`${status[xdat.Status]}`.rainbow);
-                                logger.log('');
-                                logger.log(colors.white(`[+] Search the transfer whitelisted pokemon`));
-                                // logger.log(colors.white(`[+] Trainer.getTransferWhiteList() total ${Trainer.getTransferWhiteList().length}`));
-                                for (var i = 0; i < Trainer.getTransferWhiteList().length; i++) {
-                                    // logger.log(colors.white(`[+] check currentPokemon.PokedexTypeId`));
-                                    // logger.log(colors.white(`[+] check Trainer.getTransferWhiteList()[i]`));
-                                    // logger.log(`${Trainer.getTransferWhiteList()[i]} === ${currentPokemon.PokedexTypeId}`);
-                                    // logger.log(currentPokemon);
-                                    // logger.log(Trainer.getTransferWhiteList()[i]);
-                                    if (Trainer.getTransferWhiteList()[i] === currentPokemon.pokemon.PokemonId) {
-                                        logger.log(colors.rainbow(`[+] Found a whitelisted pokemon to transfer`));
-                                        Trainer.m_user.TransferPokemon(currentPokemon.pokemon.PokemonId,
-                                            function(err, res) {
-                                                logger.log(res);
+                    for (var bli = 0; bli < Trainer.getCatchBlackList().length; bli++) {
+                        if (Trainer.getCatchBlackList()[bli] === currentPokemon.pokemon.PokemonId) {
+                            logger.log(colors.rainbow(`[+] Encountering blacklist pokemon ignoring`));
+                            logger.log(currentPokemon);
+
+                        } else {
+
+                            Trainer.m_user.CatchPokemon(
+                                currentPokemon, 1,
+                                1.950, 1,
+                                Trainer.m_usePokeballType,
+                                function(xsuc, xdat) {
+                                    var status = [
+                                        'Unexpected error',
+                                        'Successful catch',
+                                        'Catch Escape',
+                                        'Catch Flee',
+                                        'Missed Catch'
+                                    ];
+                                    try {
+                                        logger.log(`${status[xdat.Status]}`.rainbow);
+                                        logger.log('');
+                                        logger.log(colors.white(`[+] Search the transfer whitelisted pokemon`));
+                                        // logger.log(colors.white(`[+] Trainer.getTransferWhiteList() total ${Trainer.getTransferWhiteList().length}`));
+                                        for (var i = 0; i < Trainer.getTransferWhiteList().length; i++) {
+                                            // logger.log(colors.white(`[+] check currentPokemon.PokedexTypeId`));
+                                            // logger.log(colors.white(`[+] check Trainer.getTransferWhiteList()[i]`));
+                                            // logger.log(`${Trainer.getTransferWhiteList()[i]} === ${currentPokemon.PokedexTypeId}`);
+                                            // logger.log(currentPokemon);
+                                            // logger.log(Trainer.getTransferWhiteList()[i]);
+                                            if (Trainer.getTransferWhiteList()[i] === currentPokemon.pokemon.PokemonId) {
+                                                logger.log(colors.rainbow(`[+] Found a whitelisted pokemon to transfer`));
+                                                Trainer.m_user.TransferPokemon(currentPokemon.pokemon.PokemonId,
+                                                    function(err, res) {
+                                                        logger.log(res);
+                                                    }
+                                                );
                                             }
-                                        );
+                                        }
+                                    } catch (e) {
+                                        logger.log(e);
+                                        // logger.log(xsuc);
+                                        // logger.log(xdat);
                                     }
-                                }
-                            } catch (e) {
-                                logger.log(e);
-                                logger.log(xsuc);
-                                logger.log(xdat);
-                            }
-                        });
+                                });
+                        }
+
+                    }
                 });
         } else {
             // var randomNumber = random(0, 4);
@@ -473,6 +483,35 @@ method.walkRandomDirection = function(callback) {
 };
 
 method.getTransferWhiteList = function() {
+    // TODO: quick test list, pull list from user couchbase document when finished
+    var pokemonLIST = {
+        Shellder: 90,
+        Weedle: 13,
+        Caterpie: 10,
+        Zubat: 41,
+        Voltorb: 100,
+        Sandshrew: 27,
+        Spearow: 21,
+        Staryu: 120,
+        Horsea: 116,
+        Nidoran: 32
+    };
+    return [
+        pokemonLIST.Shellder,
+        pokemonLIST.Weedle,
+        pokemonLIST.Caterpie,
+        pokemonLIST.Zubat,
+        pokemonLIST.Voltorb,
+        pokemonLIST.Sandshrew,
+        pokemonLIST.Spearow,
+        pokemonLIST.Staryu,
+        pokemonLIST.Horsea,
+        pokemonLIST.Nidoran
+    ];
+
+};
+
+method.getCatchBlackList = function() {
     // TODO: quick test list, pull list from user couchbase document when finished
     var pokemonLIST = {
         Shellder: 90,
